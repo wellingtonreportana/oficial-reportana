@@ -1,0 +1,41 @@
+---
+title: "Recomendação de tamanhos"
+description: ""
+---
+
+Nesse exemplo, utilizamos o **Executar JavaScript** para enviar recomendações de tamanhao ao cliente de acordo com seu _peso_ e _altura_. Essa funcionalidade é útil principalmente para quem trabalha com roupas e há dúvidas do cliente com relação ao tamanho mais adequado.
+
+1. Primeiramente, na estrutura da automação, solicitamos que o cliente envie sua _altura_ e _peso_.
+
+<img src="/exp-tamanhos1.png" alt="Exemplo recomendação: imagem 1" />
+
+2. Em seguida, salvamos as respostas do cliente nas variáveis `payload.altura` e `payload.peso`.
+
+<img src="/exp-tamanhos2.png" alt="Exemplo recomendação: imagem 2" />
+<img src="/exp-tamanhos3.png" alt="Exemplo recomendação: imagem 3" />
+
+3. No **Executar JavaScript** utilizamos a variável `payload.altura` e `payload.peso` para calcular o IMC do cliente e sugerir o tamanho mais adequado de acordo com essas informações.
+
+<img src="/exp-tamanhos4.png" alt="Exemplo recomendação: imagem 4" />
+
+4. Por último, o resultado do código será salvo na variável `payload.tamanhoSugerido` que é enviado ao cliente na última mensagem indicando o tamanho sugerido conforme sua altura e peso.
+
+<RequestExample>
+
+```javaScript Código Exemplo
+var altura = payload.altura / 100; // Convertendo altura para metros
+var peso = payload.peso;
+var imc = peso / (altura * altura);
+
+if (imc < 18.5) {
+  payload.tamanhoSugerido = 'Seu tamanho sugerido: PP';
+} else if (imc >= 18.5 && imc < 24.9) {
+  payload.tamanhoSugerido = 'Seu tamanho sugerido: P';
+} else if (imc >= 25 && imc < 29.9) {
+  payload.tamanhoSugerido = 'Seu tamanho sugerido: M';
+} else if (imc >= 30) {
+  payload.tamanhoSugerido = 'Seu tamanho sugerido: G';
+}
+```
+
+</RequestExample>

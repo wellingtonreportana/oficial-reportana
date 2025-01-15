@@ -1,0 +1,22 @@
+---
+title: "format_currency"
+description: ""
+---
+
+### Introdução
+
+O filtro `format_currency` é utilizado para formatar números como valores monetários. Ele permite exibir valores em um formato específico de moeda, com o símbolo da moeda e a quantidade correta de casas decimais. Isso é útil para garantir que valores financeiros sejam apresentados de maneira clara e consistente.
+
+> **Atenção:** O filtro `format_currency` funciona exclusivamente por meio do envio de Automações, Campanhas e Campanhas Avançadas.
+
+### Exemplo de uso
+
+Exemplo de como formatar um número como moeda utilizando o filtro `format_currency`:
+
+```twig
+{{ 1234.5678|format_currency('BRL') }}
+```
+
+### Saída exemplo do código
+
+<img src="/format_currency.png" alt="Resultado do Filtro `format_currency`" />

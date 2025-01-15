@@ -1,0 +1,23 @@
+---
+title: "split"
+description: ""
+---
+
+### Introdução
+
+O filtro `split` é utilizado para dividir uma string em partes menores, com base em um delimitador específico. Ele retorna um array contendo as partes da string original, o que é útil para manipular e acessar subseções da string.
+
+### Exemplo de uso
+
+Exemplo de como utilizar o filtro `split` para dividir uma string em palavras:
+
+```twig
+{% set text = 'Hello World' %}
+{% set words = text|split(' ') %}
+{{ words[0] }} {# Retorna "Hello" #}
+{{ words[1] }} {# Retorna "World" #}
+```
+
+### Saída exemplo do código
+
+<img src="/split.png" alt="Resultado do Filtro `split`" />

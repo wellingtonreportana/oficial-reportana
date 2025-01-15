@@ -1,0 +1,146 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Reportana - Documentação",
+  "logo": {
+    "dark": "/reportana-logo-dark.svg",
+    "light": "/reportana-logo-white.svg"
+  },
+
+  "favicon": "/favicon1.svg",
+
+  "colors": {
+    "primary": "#83E479",
+    "light": "#83E479",
+    "dark": "#83E479"
+  },
+
+  "topbarLinks": [
+    {
+      "name": "Suporte - WhatsApp",
+      "url": "https://api.whatsapp.com/send?phone=5549991504894&text=Ol%C3%A1%2C%20estou%20com%20d%C3%BAvidas%20sobre%20a%20documenta%C3%A7%C3%A3o%20da%20Reportana."
+    }
+  ],
+
+  "tabs": [
+    {
+      "name": "Reportana® Script",
+      "url": "reportana-script"
+    },
+    {
+      "name": "Executar JavaScript",
+      "url": "executar-javascript"
+    }
+  ],
+
+  "navigation": [
+    {
+      "group": "Reportana® Script",
+      "pages": ["reportana-script/start/reportana-script"]
+    },
+    {
+      "group": "Introdução",
+      "pages": [
+        "reportana-script/introduction/variables",
+        "reportana-script/introduction/client",
+        "reportana-script/introduction/business",
+        "reportana-script/introduction/orders",
+        "reportana-script/introduction/tracking",
+        "reportana-script/introduction/abandoned-carts"
+      ]
+    },
+
+    {
+      "group": "Operadores",
+      "pages": [
+        "reportana-script/operators/in",
+        "reportana-script/operators/is",
+        "reportana-script/operators/math",
+        "reportana-script/operators/logic",
+        "reportana-script/operators/comparisons",
+        "reportana-script/operators/others"
+      ]
+    },
+    {
+      "group": "Estruturas",
+      "pages": [
+        "reportana-script/structures/for",
+        "reportana-script/structures/if_else",
+        "reportana-script/structures/set",
+        "reportana-script/structures/do"
+      ]
+    },
+
+    {
+      "group": "Filtros",
+      "pages": [
+        "reportana-script/filters/escape",
+        "reportana-script/filters/date",
+        "reportana-script/filters/date_modify",
+        "reportana-script/filters/default",
+        "reportana-script/filters/format_currency",
+        "reportana-script/filters/number_format",
+        "reportana-script/filters/join",
+        "reportana-script/filters/json_encode",
+        "reportana-script/filters/length",
+        "reportana-script/filters/lower",
+        "reportana-script/filters/map",
+        "reportana-script/filters/raw",
+        "reportana-script/filters/slice",
+        "reportana-script/filters/split",
+        "reportana-script/filters/title",
+        "reportana-script/filters/trim",
+        "reportana-script/filters/upper",
+        "reportana-script/filters/sort"
+      ]
+    },
+
+    {
+      "group": "Funções",
+      "pages": [
+        "reportana-script/functions/find_order_by_number",
+        "reportana-script/functions/find_orders_by_email"
+      ]
+    },
+
+    {
+      "group": "Executar JavaScript",
+      "pages": [
+        "executar-javascript/introduction-js/introduction",
+        "executar-javascript/introduction-js/payload",
+        "executar-javascript/introduction-js/data-capture",
+        "executar-javascript/introduction-js/data-use",
+        "executar-javascript/introduction-js/limitations"
+      ]
+    },
+
+    {
+      "group": "Funções",
+      "pages": [
+        "executar-javascript/functions-js/findOrdersByEmail",
+        "executar-javascript/functions-js/findOrdersByPhone",
+        "executar-javascript/functions-js/findOrdersByNumber",
+        "executar-javascript/functions-js/findOrdersByDocument",
+        "executar-javascript/functions-js/findOrdersByTrackingNumber"
+      ]
+    },
+
+    {
+      "group": "Códigos Exemplos",
+      "pages": [
+        "executar-javascript/examples/prazo-de-entrega",
+        "executar-javascript/examples/recomendação-de-tamanhos",
+        "executar-javascript/examples/segmentação-de-produtos",
+        "executar-javascript/examples/api-viacep",
+        "executar-javascript/examples/api-receitaws",
+        "executar-javascript/examples/api-trello"
+      ]
+    }
+  ],
+
+  "footerSocials": {
+    "website": "https://reportana.com",
+    "linkedin": "https://br.linkedin.com/company/reportana",
+    "facebook": "https://www.facebook.com/Reportana/",
+    "instagram": "https://www.instagram.com/reportana/"
+  }
+}

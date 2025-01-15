@@ -1,0 +1,12 @@
+---
+title: "Dados do Negócio"
+description: "*Variáveis disponíveis para imprimir dados do negócio em mensagens.*"
+---
+
+Pode-se utilizar para exibir informações sobre seu negócio/loja. Essas informações são as informações cadastradas em sua conta. Portanto, é possível utilizar essas variáveis tanto em mensagens destinadas a pedidos quanto em mensagens destinadas a carrinhos abandonados.
+
+| **Nome**               | **Variável**                      | **Saída**                          | **Tipo**  |
+| ---------------------- | --------------------------------- | --------------------------------- | --------- |
+| Moeda                  | `{{ shop.currency_code }}`        | BRL                               | String    |
+| Nome do negócio        | `{{ shop.name }}`                 | Loja Teste                        | String    |
+| Endereço do negócio    | `{{ billing_address_formatted }}` | Rua Flores 456, Apto 31, Centro, Florianópolis | String    |

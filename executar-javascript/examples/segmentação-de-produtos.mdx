@@ -1,0 +1,39 @@
+---
+title: "Segmentação de produtos"
+description: ""
+---
+
+Nesse exemplo, utilizamos o **Executar JavaScript** para segmentar produtos e filtrar o cliente, indicando o produto que melhor se encaixa ao seu nível atual de conhecimento. Essa funcionalidade é recomendada especialmente para infoprodutores ou afiliados.
+
+1. Primeiramente, na estrutura da automação, solicitamos que o cliente envie nos informe seu nível de conhecimento de acordo com ele.
+
+<img src="/exp-recomendacao1.png" alt="Exemplo recomendação: imagem 1" />
+
+2. Em seguida, salvamos a resposta do cliente na variável `payload.nivel`.
+
+<img src="/exp-recomendacao2.png" alt="Exemplo recomendação: imagem 2" />
+
+3. No **Executar JavaScript** utilizamos a variável `payload.nivel` para filtrar o nível de conhecimento do cliente.
+
+<img src="/exp-recomendacao3.png" alt="Exemplo recomendação: imagem 3" />
+
+4. Por último, o resultado do código será salvo na variável `payload.recomendacao` que é enviado ao cliente na última mensagem indicando o produto sugerido de acordo com o nível de conhecimento informado por ele.
+
+<RequestExample>
+
+```javaScript Código Exemplo
+var nivel = payload.nivel.toLowerCase(); // Convertendo para minúsculas para padronizar
+
+if (nivel === 'iniciante') {
+  payload.recomendacao = 'Curso: Introdução ao Mercado';
+} else if (nivel === 'intermediário' || nivel === 'intermediario') {
+  payload.recomendacao = 'Curso: Desenvolvimento Profissional';
+} else if (nivel === 'avançado' || nivel === 'avancado') {
+  payload.recomendacao = 'Curso: Planejamento de Carreira e Finanças';
+} else {
+  payload.recomendacao = 'Nível de conhecimento não reconhecido. Verifique a resposta e tente novamente.';
+}
+
+```
+
+</RequestExample>

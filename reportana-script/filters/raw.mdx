@@ -1,0 +1,26 @@
+---
+title: "raw"
+description: ""
+---
+
+### Introdução
+
+O filtro `raw` permite exibir conteúdo sem escapar variáveis. Ele é útil quando você precisa renderizar conteúdos que não devem ser automaticamente convertidos em texto seguro, como quando você precisa exibir tags HTML ou scripts na saída final.
+
+### Exemplo de uso
+
+Exemplo de como utilizar o filtro `raw` para renderizar um script diretamente em um template:
+
+```twig
+{% set conteudo = "<script>alert('Este é um alerta JavaScript');</script>" %}
+
+{{ conteudo|raw }}
+```
+
+#### Neste caso, a saída será o código JavaScript que gera o alerta:
+
+```twig
+<script>alert('Este é um alerta JavaScript');</script>
+```
+
+Neste exemplo, o filtro `raw` é aplicado à variável conteudo para garantir que as tags sejam renderizadas corretamente na saída final, em vez de serem escapadas. Ao renderizar isso em uma página web, por exemplo, o alerta JavaScript será exibido.

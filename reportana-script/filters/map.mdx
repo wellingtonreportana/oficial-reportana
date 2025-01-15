@@ -1,0 +1,26 @@
+---
+title: "map"
+description: ""
+---
+
+### Introdução
+
+O filtro `map` permite aplicar uma função a cada item de uma coleção (como arrays ou objetos), retornando uma nova coleção com os resultados. Esse filtro é útil para transformar os elementos de uma coleção de forma simples e eficiente.
+
+> **Atenção:** O filtro `map` funciona exclusivamente por meio do envio de Automações, Campanhas e Campanhas Avançadas.
+
+### Exemplo de uso
+
+Exemplo de como utilizar o filtro `map` para multiplicar cada número em um array por 2:
+
+```twig
+{% set numbers = [1, 2, 3, 4, 5] %}
+{% set doubled = numbers|map(n => n * 2) %}
+{{ doubled|join(', ') }}
+```
+
+Neste exemplo, o array numbers é transformado pelo filtro `map`, que aplica a função de multiplicação por 2 a cada elemento. O resultado é um novo array `[2, 4, 6, 8, 10]`, que é então convertido em uma **string** com os números separados por vírgulas.
+
+### Saída exemplo do código
+
+<img src="/map.png" alt="Resultado do Filtro `map`" />

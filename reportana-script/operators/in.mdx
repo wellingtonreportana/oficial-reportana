@@ -1,0 +1,21 @@
+---
+title: "in"
+description: ""
+---
+
+O operador `in` é utilizado para verificar se um valor está presente em uma _lista_, _string_ ou _outro tipo de coleção_. Ele retorna `true` se o valor à esquerda do operador for encontrado dentro da coleção à direita, e `false` caso contrário.
+
+**Exemplo de como utilizar o operador `in` combinado com `if/else` para verificar se um item está presente em determinada lista:**
+
+```twig
+{% set fruits = ['Apple', 'Banana', 'Orange'] %}
+
+{# Verificando se 'Apple' está na lista de fruits #}
+{% if 'Apple' in fruits %}
+Apple está na lista de fruits.
+{% else %}
+Apple não está na lista de fruits.
+{% endif %}
+```
+
+_Neste exemplo_, o operador `in` verifica se a string "Apple" está presente na lista fruits. Como "Apple" está na lista, a condição será verdadeira, e a mensagem "Apple está na lista de fruits." será exibida.

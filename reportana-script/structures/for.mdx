@@ -1,0 +1,25 @@
+---
+title: "for"
+description: ""
+---
+
+Quando temos uma variável do tipo array, como as atualizações de rastreamento em `tracking_number.events`, podemos usar o `for` para exibir cada item do array de forma organizada.
+
+_Por exemplo_, com `for`, podemos demonstrar cada atualização de rastreamento com detalhes como data, tipo de evento, localização e descrição:
+
+```twig
+{% for event in tracking_number.events %} <br>
+
+  {{ event.date|date("d/m/Y") }} <br>
+  {{ event.label }} <br>
+  {{ event.location }} <br>
+  {{ event.description }} <br>
+
+{% endfor %}
+```
+
+**Saída exemplo do código (Utilizando uma tabela HTML e estilização CSS):**
+
+<img src="/ex-tracking.png" alt="Exemplo `for`" />
+
+Dentro do loop, usamos `event.variável` para acessar cada parte da atualização de rastreamento. Essa abordagem simplificada nos permite exibir todas as atualizações de rastreamento de forma clara e organizada. Lembrando que é possível utilizar _HTML_ em conjunto com _CSS_ para melhorar a visualização das informações iteradas em mensagens de e-mails.

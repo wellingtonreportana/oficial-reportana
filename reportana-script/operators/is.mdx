@@ -1,0 +1,25 @@
+---
+title: "is"
+description: ""
+---
+
+O operador `is` é utilizado para realizar testes em variáveis. Ele é seguido por um teste específico (como `null`, `empty`, `defined`, etc.) e retorna `true` ou `false` dependendo se a variável atende ao critério do teste.
+
+**Exemplo utilizando `is` para verificar se a variável `order.tracking_numbers_formatted` (_Número(s) de rastreio(s)_) possui um valor definido ou não:**
+
+```twig
+{# Verificando se a variável 'order.tracking_numbers_formatted' está definida e se não está vazia #}
+{% if order.tracking_numbers_formatted is defined and order.tracking_numbers_formatted is not empty %}
+  Seu número de rastreio é {{ order.tracking_numbers_formatted }}.
+{% else %}
+  Seu pedido ainda não possui número de rastreio.
+{% endif %}
+```
+
+_Neste exemplo_, o operador `is` é utilizado para verificar duas condições:
+
+`is defined`: Verifica se a variável `order.tracking_numbers_formatted` está definida.
+
+`is not empty`: Verifica se a variável nome não está vazia.
+
+Se ambas as condições forem verdadeiras, a mensagem "Seu número de rastreio é _(Número(s) de rastreio(s) do cliente)_." será exibida. Caso contrário, será exibida a mensagem "Seu pedido ainda não possui número de rastreio.".

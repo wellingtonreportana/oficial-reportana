@@ -1,0 +1,32 @@
+---
+title: "Variável Global"
+description: ""
+---
+
+Em automações e campanhas avançadas da Reportana, temos acesso à variável global `payload`, que pode ser utilizada para acessar dados em arrays e objetos. Essa variável nos permite, por exemplo, acessar informações específicas de um array de pedidos e manipular esses dados conforme necessário. Além disso, a variável `payload` pode ser utilizada no bloco de **Executar JavaScript**, oferecendo ainda mais opções de personalização para os códigos executados com essa funcionalidade. Veja o exemplo abaixo:
+
+```JavaScript
+var totalPrice = payload.order.total_price
+```
+
+Nesse exemplo, salvamos o valor total do pedido na variável `totalPrice`, acessando o objeto `payload.order` e o atributo `total_price` (valor total do pedido). Dessa forma, conseguimos executar, por exemplo, um cálculo para calcular automaticamente um cupom de desconto ao valor total do pedido:
+
+<img src="/cap-data1.png" alt="Capturando com payload" />
+
+<RequestExample>
+
+```javascript Código Exemplo
+var valorTotal = payload.order.total_price;
+
+function aplicarDesconto(valorTotal) {
+  var desconto = valorTotal * 0.15;
+  var valorComDesconto = valorTotal - desconto;
+  return valorComDesconto;
+}
+
+var descontoAplicado = aplicarDesconto(valorTotal);
+
+payload.descontoAplicado;
+```
+
+</RequestExample>

@@ -1,0 +1,224 @@
+---
+title: "findOrdersByDocument"
+description: ""
+---
+
+## Introdução
+
+A função `findOrdersByDocument` permite localizar pedidos associados ao cliente por meio do documento do cliente, como por exemplo CPF e CNPJ. Quando executada no bloco **Executar JavaScript**, ela verifica a existência de pedidos no sistema e, se encontrados, retorna como resposta um array com detalhes completos sobre os pedidos associados ao documento em questão, incluindo informações do cliente, itens adquiridos e status de pagamento.
+
+## Como utilizar
+
+1. Primeiramente será necessário utilizar as configurações avançadas das nossas mensagens de WhatsApp para solicitar ao cliente o documento, salvando a resposta informada pelo cliente em uma variável, que nesse caso será `payload.document`.
+
+   <img
+     src="/findOrdersByDocument-img1.png"
+     alt="Resultado do Filtro `findOrdersByDocument`"
+   />
+   <img
+     src="/findOrdersByDocument-img2.png"
+     alt="Resultado do Filtro `findOrdersByDocument`"
+   />
+
+**Observação:** Para conhecer mais sobre as configurações avançadas das nossas mensagens de WhatsApp, acesse nosso artigo na central de ajuda: [Central de Ajuda - Entendendo as Ações de Lógico, Tempo, Chat e Avançado das Automações.](https://reportana.com/help/article/conhecendo-opcoes-de-acao-tempo-e-logica-de-automacoes)
+
+2. Em seguida, assim que o cliente informar o número do seu documento, na estrutura da automação, utilizaremos o bloco **Executar JavaScript** para executar a função `findOrdersByDocument` e realizar a busca dos pedidos associados ao documento informado.
+
+   <img
+     src="/findOrdersByDocument-img3.png"
+     alt="Resultado do Filtro `findOrdersByDocument`"
+   />
+
+3. No **Executar JavaScript** utilizamos o código `payload.orders = await findOrdersByDocument(payload.document)` para buscar pedidos associados ao documento informado pelo cliente. Dessa forma, o documento salvo na variável `payload.document` é utilizado pela função `findOrdersByDocument` para buscar pedidos associados ao documento, o resultado é armazenado em payload.orders, em forma de array contendo os pedidos.
+
+<img
+  src="/findOrdersByDocument-img4.png"
+  alt="Resultado do Filtro `findOrdersByDocument`"
+/>
+
+4. A resposta da busca poderá retornar, nas próximas mensagens, informações sobre os pedidos encontrados.
+
+   <img
+     src="/findOrdersByDocument-img5.png"
+     alt="Resultado do Filtro `findOrdersByDocument`"
+   />
+
+   <img
+     src="/findOrdersByEmail-img6.png"
+     alt="Resultado do Filtro `findOrdersByEmail`"
+   />
+
+<Accordion title="Código utilizado no exemplo">
+
+```twig
+{% if payload.orders is not empty %}
+Encontramos *{{ payload.orders|length }}* pedido(s). Segue as informações:
+
+{% for data in payload.orders %}
+*#{{ data.order.number }}*
+{% if data.order.payment_method == 'BOLETO' %}🏷 _Boleto_{% elseif data.order.payment_method == 'CREDIT_CARD' %}💳 _Cartão de crédito_{% elseif data.order.payment_method == 'PIX' %}🤳🏼 _Pix_{% else %}🏷 _Outro_{% endif %}
+
+{% if data.order.payment_status == 'PAID' %}✅ _Pago_{% elseif data.order.payment_status == 'PENDING' %}⏳ _Pendente_{% else %}❌ _Não pago_{% endif %}
+
+{% if data.order.tracking_numbers_url is not empty %}🚚 {{ data.order.tracking_numbers_url }}{% else %}🚚 _Envio pendente_{% endif %}
+
+
+{% endfor %}
+{% else %}
+Nenhum pedido encontrado.
+{% endif %}
+```
+
+</Accordion>
+
+**Observação:** No código exemplo, caso não seja encontrado nenhum pedido associado ao documento informado, a mensagem _"Nenhum pedido encontrado será exibida"_.
+
+Para estruturar a mensagem de resposta contendo os dados do pedido nesse exemplo, utilizamos a linguagem de template **Reportana® Script**, que permite o uso das estruturas `for` e `if/else`. Esses comandos possibilitam a formatação detalhada e condicional das informações exibidas. Para aprofundar o conhecimento sobre o uso da **Reportana® Script** e explorar mais exemplos, consulte a documentação completa: [Reportana® Script - Documentação](https://reportana.mintlify.app/start/reportana-script).
+
+## Retorno da função `findOrdersByDocument`
+
+```twig
+{
+  "orders": [
+    {
+      "reference_id": 1234,
+      "reference_type": "ORDER",
+      "customer_id": 1234,
+      "name": "João Teste",
+      "first_name": "João",
+      "last_name": "Teste",
+      "email": "teste@gmail.com",
+      "phone": "55999999999",
+      "shop": {
+        "id": 1234,
+        "name": "Loja Teste",
+        "currency_code": "BRL",
+        "billing_address_formatted": "Rua Florianópolis 123, Centro, São José, MG, 36490-008, BR"
+      },
+      "customer": {
+        "id": 104657184,
+        "name": "João Teste",
+        "email": "teste@gmail.com",
+        "phone": "55999999999",
+        "birth_date": null,
+        "metadata": []
+      },
+      "order": {
+        "admin_url": "https://….png",
+        "customer_name": "João Teste",
+        "customer_email": "teste@gmail.com",
+        "customer_phone": "55999999999",
+        "customer_document": "12345678900",
+        "billing_address": {
+          "name": "João Teste",
+          "first_name": "João",
+          "last_name": "Teste",
+          "company": null,
+          "phone": "55999999999",
+          "address1": "Rua Flores 456, Apto 31",
+          "address2": "Centro",
+          "city": "Florianópolis",
+          "province": "Santa Catarina",
+          "province_code": "SC",
+          "country": "Brazil",
+          "country_code": "BR",
+          "zip": "06970000",
+          "latitude": null,
+          "longitude": null
+        },
+        "shipping_address": {
+          "name": "João Teste",
+          "first_name": "João",
+          "last_name": "Teste",
+          "company": null,
+          "phone": "55999999999",
+          "address1": "Rua Flores 456, Apto 31",
+          "address2": "Centro",
+          "city": "Florianópolis",
+          "province": "Santa Catarina",
+          "province_code": "SC",
+          "country": "Brazil",
+          "country_code": "BR",
+          "zip": "06970000",
+          "latitude": null,
+          "longitude": null
+        },
+        "number": "1234",
+        "currency": "BRL",
+        "total_price": "99.90",
+        "total_price_formatted": "R$99,90",
+        "subtotal_price": "0.00",
+        "subtotal_price_formatted": "R$0,00",
+        "line_items": [
+          {
+            "title": "Meu Robô",
+            "variant_title": "Azul",
+            "quantity": 1,
+            "price": 210.27,
+            "path": "https://….png",
+            "image_url": "https://….png",
+            "tracking_number": null
+          }
+        ],
+        "payment_status": "PAID",
+        "payment_method": "BOLETO",
+        "billet_url": "https://boleto.pl/1234abcd",
+        "billet_line": "00000000000000000000000000000000000000000000000",
+        "billet_expired_at": "2024-04-30 00:00:00",
+        "billet_expired_at_formatted": "30/04/2024",
+        "original_created_at": "2024-04-27 08:30:06",
+        "billing_address_formatted": "Rua Flores 456, Apto 31, Centro, Florianópolis, SC, 06970000",
+        "shipping_address_formatted": "Rua Flores 456, Apto 31, Centro, Florianópolis, SC, 06970000",
+        "line_items_formatted": "Meu Robô",
+        "line_items_formatted_with_variant": "Meu Robô - Azul",
+        "tracking_numbers_formatted": "1234ABCD",
+        "tracking_numbers_url": "https://boleto.pl/1234ABCD",
+        "tracking_numbers": [
+          {
+            "code": "NL0000000000BR",
+            "new_code": "NL0000000123BR",
+            "full_status": "DELIVERED",
+            "elapsed_time": 30,
+            "tax_at": "2024-11-30 11:46:45",
+            "delivered_at": "2024-12-14 11:46:45",
+            "returning_to_sender_at": "2024-11-30 11:46:45",
+            "returned_to_sender_at": "2024-11-30 11:46:45",
+            "first_update_at": "2024-11-14 11:46:45",
+            "last_update_at": "2024-12-14 11:46:45",
+            "last_request_at": "2024-12-14 11:46:45",
+            "events": [
+              {
+                "type": "CORREIOS",
+                "date": "2024-12-14 11:46:45",
+                "label": "Entregue",
+                "location": "São Paulo - SP",
+                "description": "Sua encomenda foi entregue"
+              },
+              {
+                "type": "CORREIOS",
+                "date": "2024-11-14 11:46:45",
+                "label": "Postado",
+                "location": "São Paulo - SP",
+                "description": "Aceito pela transportadora"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+## Dados retornados na resposta
+
+A busca retorna diversas informações detalhadas sobre os pedidos, incluindo:
+
+- **Dados do Cliente:** Nome, telefone, e-mail utilizados para realizar o pedido, etc;
+- **Informações do Pedido:** ID do pedido, status de pagamento (ex.: pago, pendente), método de pagamento (ex.: boleto, cartão), data de criação do pedido, etc;
+- **Dados de Endereço:** Endereço de cobrança e endereço de entrega, incluindo cidade, estado, CEP, etc;
+- **Itens do Pedido:** Nome do produto, variante (ex.: cor), quantidade, preço unitário, link para imagem do produto, etc;
+- **Informações de Pagamento:** URL do boleto, linha digitável do boleto, data de vencimento, Pix cópia e cola, valor total do pedido, etc;
+- **URLs Úteis:** Link para rastreamento do pedido e qualquer outras URLs relevantes.
+
+Esses dados permitem compor mensagens personalizadas para informar o cliente sobre os detalhes dos pedidos associados ao documento informado na busca.

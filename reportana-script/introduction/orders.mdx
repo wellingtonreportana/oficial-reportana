@@ -1,0 +1,71 @@
+---
+title: "Dados de Pedidos"
+description: "*Variáveis disponíveis para imprimir dados de pedidos em mensagens.*"
+---
+
+Estão disponíveis para uso somente em mensagens destinadas a pedidos. Para utilizar dados de pedidos em suas mensagens, você _deve categorizar a mensagem_ com o **Tipo PEDIDO**. Ao fazer isso, nosso sistema realizará a leitura dos dados de pedidos e permitirá seu uso adequado.
+
+**Dados Gerais do Pedido**
+
+| **Nome**                                     | **Variável**                                    | **Saída**                                                                 | **Tipo** |
+| -------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------- | -------- |
+| Data de Venc. do Boleto                      | `{{ order.billet_expired_at_formatted }}`       | 12/02/2024                                                                | String   |
+| Linha digitável do boleto / Pix Copia e Cola | `{{ order.billet_line }}`                       | Código de Pagamento                                                       | String   |
+| Link do boleto/pagamento                     | `{{ order.billet_url }}`                        | link.pagamento/exemPLO                                                    | String   |
+| Moeda                                        | `{{ order.currency }}`                          | BRL                                                                       | String   |
+| Número do pedido                             | `{{ order.number }}`                            | 11205                                                                     | String   |
+| Valor subtotal                               | `{{ order.subtotal_price }}`                    | 9.90                                                                      | Number   |
+| Valor subtotal (Formatado)                   | `{{ order.subtotal_price_formatted }}`          | R$9,90                                                                    | String   |
+| Valor total                                  | `{{ order.total_price }}`                       | 210.27                                                                    | Number   |
+| Valor total (Formatado)                      | `{{ order.total_price_formatted }}`             | R$210,27                                                                  | String   |
+| Endereço completo (Formatado)                | `{{ order.shipping_address_formatted }}`        | Rua Flores, 456 - C - Bairro dos Sonhos, Florianópolis, SC, 06970-000, BR | String   |
+| Produtos (Formatado)                         | `{{ order.line_items_formatted }}`              | Produto 01 - AB                                                           | Array    |
+| Produtos com Variante (Formatado)            | `{{ order.line_items_formatted_with_variant }}` | Produto 01 - AB - Variante / C                                            | String   |
+
+**Itens do Pedido | `order.line_items` - Array**
+
+| **Nome**                      | **Variável**                    | **Saída**                      | **Tipo** |
+| ----------------------------- | ------------------------------- | ------------------------------ | -------- |
+| Itens Pedido (Array Completo) | `{{ order.line_items }}`        | `[{"title": "Meu Robô"}, ...]` | Array    |
+| Título                        | `{{ line_item.title }}`         | Meu Robô                       | String   |
+| Nome da Variante              | `{{ line_item.variant_title }}` | Azul                           | String   |
+| Quantidade                    | `{{ line_item.quantity }}`      | 1                              | Number   |
+| Preço                         | `{{ line_item.price }}`         | 210.27                         | Number   |
+| URL da Imagem                 | `{{ line_item.image_url }}`     | https://….png                  | String   |
+
+**Endereço de Entrega Pedidos | `order.shipping_address` - Object**
+
+| **Nome**            | **Variável**                            | **Saída**                | **Tipo** |
+| ------------------- | --------------------------------------- | ------------------------ | -------- |
+| Endereço de entrega | `{{ order.shipping_address }}`          | `{"zip":"06970-000", …}` | Object   |
+| CEP                 | `{{ order.shipping_address.zip }}`      | 06970-000                | Number   |
+| Cidade              | `{{ order.shipping_address.city }}`     | Florianópolis            | String   |
+| Estado              | `{{ order.shipping_address.province }}` | Santa Catarina           | String   |
+| Endereço 1          | `{{ order.shipping_address.address1 }}` | Rua Flores 456, Apto 31  | String   |
+| Endereço 2          | `{{ order.shipping_address.address2 }}` | Centro                   | String   |
+
+**Dados de Rastreio | `order.tracking_numbers` - Array**
+
+| **Nome**                    | **Variável**                                | **Saída**                     | **Tipo**    |
+| --------------------------- | ------------------------------------------- | ----------------------------- | ----------- |
+| Código de rastreio          | `{{ order.tracking_numbers.code }}`         | NL0000000000BR                | String      |
+| Novo código de rastreio     | `{{ order.tracking_numbers.new_code }}`     | NL0000000123BR                | String      |
+| Status completo             | `{{ order.tracking_numbers.full_status }}`  | ENTREGUE                     | String      |
+| Tempo decorrido (em dias)   | `{{ order.tracking_numbers.elapsed_time }}` | 30                            | Number      |
+| Taxação em                  | `{{ order.tracking_numbers.tax_at }}`       | 2024-11-30 11:46:45           | String      |
+| Entregue em                 | `{{ order.tracking_numbers.delivered_at }}` | 2024-12-14 11:46:45           | String      |
+| Em devolução desde          | `{{ order.tracking_numbers.returning_to_sender_at }}` | 2024-11-30 11:46:45  | String      |
+| Devolvido ao remetente em   | `{{ order.tracking_numbers.returned_to_sender_at }}` | 2024-11-30 11:46:45 | String      |
+| Primeiro status atualizado  | `{{ order.tracking_numbers.first_update_at }}` | 2024-11-14 11:46:45    | String      |
+| Última atualização          | `{{ order.tracking_numbers.last_update_at }}` | 2024-12-14 11:46:45     | String      |
+| Última requisição           | `{{ order.tracking_numbers.last_request_at }}` | 2024-12-14 11:46:45     | String      |
+| Eventos de Rastreio | `order.tracking_numbers.events`            |     Array com Eventos                          |   Array          |
+
+| **Nome**                   | **Variável**                                         | **Saída**                     | **Tipo**    |
+| -------------------------- | ---------------------------------------------------- | ----------------------------- | ----------- |
+| Tipo do evento             | `{{ order.tracking_numbers.events.type }}`       | CORREIOS                      | String      |
+| Data do evento             | `{{ order.tracking_numbers.events.date }}`       | 2024-12-14 11:46:45           | String      |
+| Rótulo do evento           | `{{ order.tracking_numbers.events.label }}`      | Entregue                      | String      |
+| Local do evento            | `{{ order.tracking_numbers.events.location }}`   | São Paulo - SP                | String      |
+| Descrição do evento        | `{{ order.tracking_numbers.events.description }}`| Sua encomenda foi entregue    | String      |
+

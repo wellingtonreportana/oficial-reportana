@@ -1,0 +1,38 @@
+---
+title: "find_orders_by_email"
+description: ""
+---
+
+### Introdução
+
+A função `find_orders_by_email` é utilizada para buscar pedidos realizados conforme o e-mail informado pelo cliente. Ele é útil para criar consultas de pedidos em automações de chatbot, por exemplo. Sendo possível exibir informações sobre o pedido. Lembrando que nesse caso, o sistema irá buscar todos os pedidos atrelados ao e-mail informado.
+
+> **Atenção:** A função `find_orders_by_email` funciona exclusivamente por meio do envio de Automações, Campanhas e Campanhas Avançadas.
+
+### Exemplo de uso
+
+Exemplo de como utilizar a função `find_orders_by_email` para buscar pedidos associados a determinado e-mail:
+
+```twig
+{% set data = find_orders_by_email(email) %}
+
+{% if data is not empty and data.order is not empty %}
+*#{{ data.order.number }}*
+{% if data.order.payment_method == 'BOLETO' %}🏷 _Boleto_{% elseif data.order.payment_method == 'CREDIT_CARD' %}💳 _Cartão de crédito_{% elseif data.order.payment_method == 'PIX' %}🤳🏼 _Pix_{% else %}🏷 _Outro_{% endif %}
+
+{% if data.order.payment_status == 'PAID' %}✅ _Pago_{% elseif data.order.payment_status == 'PENDING' %}⏳ _Pendente_{% else %}❌ _Não pago_{% endif %}
+
+{% if data.order.tracking_numbers_url is not empty %}🚚 {{ data.order.tracking_numbers_url }}{% else %}🚚 _Envio pendente_{% endif %}
+{% else %}
+Não há pedidos associados ao e-mail: {{ email }}.
+{% endif %}
+```
+
+### Saída exemplo do código
+
+<img
+  src="/find_orders_by_email.png"
+  alt="Resultado do Filtro `find_orders_by_email`"
+/>
+
+Nesse exemplo, buscamos os pedidos associados ao e-mail "exemplo@email.com" utilizando a função `find_orders_by_email`. Como existem pedidos com esse e-mail em nossa loja exemplo, a mensagem com as informações sobre o pedido foram impressas.

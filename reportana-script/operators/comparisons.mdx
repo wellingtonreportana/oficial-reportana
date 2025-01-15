@@ -1,0 +1,78 @@
+---
+title: "Comparisons"
+description: ""
+---
+
+Os operadores de comparação permitem verificar a relação entre dois valores. Abaixo estão os operadores suportados, com uma breve explicação e um exemplo prático de uso de cada um.
+
+**Operadores de comparações suportados atualmente:**
+
+`==`: Verifica se dois valores são iguais.
+
+_Exemplo de uso:_
+
+```twig
+{% if 'apple' == 'apple' %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`===`: Verifica se dois valores são idênticos, ou seja, se são iguais e do mesmo tipo.
+
+_Exemplo de uso:_
+
+```twig
+{% if 123 === 123 %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`!=`: Verifica se dois valores são diferentes.
+
+_Exemplo de uso:_
+
+```twig
+{% if 'apple' != 'orange' %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`<`: Verifica se o valor à esquerda é menor que o valor à direita.
+
+_Exemplo de uso:_
+
+```twig
+{% if 3 < 5 %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`>`: Verifica se o valor à esquerda é maior que o valor à direita.
+
+_Exemplo de uso:_
+
+```twig
+{% if 5 > 3 %}
+{# Retorna true #}
+{% endif %}
+```
+
+`<=`: Verifica se o valor à esquerda é menor ou igual ao valor à direita.
+
+_Exemplo de uso:_
+
+```twig
+{% if 3 <= 3 %}
+{# Retorna true #}
+{% endif %}
+```
+
+`>=`: Verifica se o valor à esquerda é maior ou igual ao valor à direita.
+
+_Exemplo de uso:_
+
+```twig
+{% if 5 >= 3 %}
+{# Retorna true #}
+{% endif %}
+```

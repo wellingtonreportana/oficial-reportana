@@ -1,0 +1,52 @@
+---
+title: "Logic"
+description: ""
+---
+
+Podemos utilizar operadores lógicos para criar condições mais complexas em nossos templates.
+
+**Operadores lógicos suportados atualmente:**
+
+`and`: Retorna `true` se ambos os operandos, esquerdo e direito, forem verdadeiros.
+
+_Exemplo de uso:_
+
+```twig
+{# Ambos são verdadeiros #}
+{% if true and true %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`or`: Retorna `true` se pelo menos um dos operandos, esquerdo ou direito, for verdadeiro.
+
+_Exemplo de uso:_
+
+```twig
+{# Pelo menos um é verdadeiro #}
+{% if true or false %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`not`: Nega uma expressão, invertendo seu valor lógico.
+
+_Exemplo de uso:_
+
+```twig
+{# Nega o valor lógico #}
+{% if not false %}
+  {# Retorna true #}
+{% endif %}
+```
+
+`(expr)`: Agrupa uma expressão para definir a precedência dos operadores.
+
+_Exemplo de uso:_
+
+```twig
+{# Agrupamento de expressões #}
+{% if (true or false) and true %}
+{# Retorna true #}
+{% endif %}
+```

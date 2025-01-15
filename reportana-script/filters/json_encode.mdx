@@ -1,0 +1,22 @@
+---
+title: "json_encode"
+description: ""
+---
+
+### Introdução
+
+O filtro json_encode converte uma variável, como um array ou objeto, em uma string no formato JSON. Esse filtro é especialmente útil quando você precisa passar dados de um template Twig para um script JavaScript ou uma API que utiliza JSON.
+
+### Exemplo de uso
+
+Exemplo de como utilizar o filtro `json_encode` para converter um array em uma string JSON:
+
+```twig
+{% set pedido = {numero: 12345, cliente: 'João Silva', itens: ['Produto 1', 'Produto 2', 'Produto 3'], valor_total: 299.99} %}
+
+{{ pedido|json_encode }}
+```
+
+### Saída exemplo do código
+
+<img src="/json_encode.png" alt="Resultado do Filtro `json_encode`" />

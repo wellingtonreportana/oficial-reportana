@@ -1,0 +1,46 @@
+---
+title: "Consulta CNPJ"
+description: ""
+---
+
+Neste exemplo, demonstraremos como estruturar uma consulta automática utilizando a funcionalidade **Executar JavaScript** para consumir a API do ReceitaWS. O objetivo é interagir com o cliente, coletar e validar o CNPJ informado, realizar a consulta e entregar os dados cadastrais correspondentes de forma dinâmica e automatizada, assim como demonstrado no [exemplo anterior](http://localhost:3000/executar-javascript/examples/api-viacep) utilizando a API do ViaCEP.
+
+### Exemplo utilizando a API da Receitaws
+
+1. Nesse exemplo vamos utilizar o gatilho de **Conversa Criada (WhatsApp)** para iniciar a automação e salvar o número do CNPJ informado na variável `payload.cnpj`.
+
+<img src="/cnpj1.png" alt="Resultado da requisição `Reiceitaws`" />
+<img src="/cnpj2.png" alt="Resultado da requisição `Reiceitaws`" />
+
+2. Em seguida, realizamos a requisição para a API da Receitaws utilizando o **Executar JavaScript**, conforme o código abaixo:
+
+<img src="/cnpj3-2.png" alt="Resultado da requisição `Reiceitaws`" />
+
+<RequestExample>
+
+```JavaScript Exemplo de requisição para API da Receitaws
+var cnpj = payload.cnpj;
+
+const response = await axios.get(`https://receitaws.com.br/v1/cnpj/${cnpj}`);
+
+if (response.status === 200) {
+  payload.razaoSocial = response.data.nome || "Razão Social não disponível";
+  payload.nomeFantasia = response.data.fantasia || "Nome Fantasia não disponível";
+  payload.situacao = response.data.situacao || "Situação não disponível";
+  payload.dataAbertura = response.data.abertura || "Data de abertura não disponível";
+  payload.telefone = response.data.telefone || "Telefone não disponível";
+  payload.email = response.data.email || "E-mail não disponível";
+}
+```
+</RequestExample>
+
+3. Em nossa estrutura de automação, caso a requisição falhe, daremos a opção para o cliente consultar o CEP novamente ou sair.
+
+<img src="/cnpj4.png" alt="Resultado da requisição `Reiceitaws`" />
+
+4. Caso a requisição seja feita com sucesso, os dados referentes ao CNPJ serão informados conforme a mensagem abaixo, com opções de botões para realizar uma nova consulta ou sair.
+
+<img src="/cnpj5.png" alt="Resultado da requisição `Reiceitaws`" />
+<img src="/cnpj6.png" alt="Resultado da requisição `Reiceitaws`" />
+
+**Observações:** Para conferir a API da Receitaws, acesse a documentação oficial: https://developers.receitaws.com.br/

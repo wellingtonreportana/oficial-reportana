@@ -1,0 +1,24 @@
+---
+title: "sort"
+description: ""
+---
+
+### Introdução
+
+O filtro `sort` é utilizado para ordenar arrays ou sequências de valores em ordem crescente. Ele é útil quando você precisa garantir que os itens sejam exibidos em uma sequência específica, como listar produtos por ordem de preço ou organizar nomes em ordem alfabética.
+
+### Exemplo de uso
+
+Exemplo de como utilizar o filtro `sort` para ordenar um array de números:
+
+```twig
+{% set numeros = [5, 3, 9, 1, 4] %}
+
+{{ numeros|sort|json_encode }}
+```
+
+Neste exemplo, o filtro `sort` ordena o array `numeros` em ordem crescente. O resultado exibirá os números organizados de forma ascendente. Para facilitar a visualização e envio dos dados no WhatsApp, utilizamos em conjunto `json_encode` para converter o array ordenado em uma string JSON.
+
+### Saída exemplo do código
+
+<img src="/sort.png" alt="Resultado do Filtro `sort`" />

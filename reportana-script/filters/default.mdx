@@ -1,0 +1,20 @@
+---
+title: "default"
+description: ""
+---
+
+### Introdução
+
+O filtro `default` é utilizado para fornecer um valor padrão quando uma variável é `null`, vazia ou não definida. Isso é útil para garantir que sempre haja um valor a ser exibido, mesmo que a variável original não tenha um valor definido.
+
+### Exemplo de uso
+
+Exemplo de como usar o filtro `default` para definir um valor padrão quando a variável `first_name` não estiver definida ou estiver vazia:
+
+```twig
+{{ first_name|default('Nome não definido') }}
+```
+
+### Saída exemplo do código
+
+<img src="/default.png" alt="Resultado do Filtro `default`" />

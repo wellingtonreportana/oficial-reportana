@@ -1,0 +1,43 @@
+---
+title: "Dados de Carrinhos Abandonados"
+description: "*Variáveis disponíveis para imprimir dados de carrinhos abandonados em mensagens.*"
+---
+
+Essas variáveis estão disponíveis para uso somente em mensagens destinadas a carrinhos abandonados. Para utilizar dados de carrinhos em suas mensagens, você _deve categorizar a mensagem_ com o **Tipo CARRINHO ABANDONADO**. Ao fazer isso, nosso sistema realizará a leitura dos dados de carrinhos abandonados e permitirá seu uso adequado.
+
+**Dados Gerais de Carrinhos Abandonados**
+
+| Nome                              | Variável                                                     | Saída                                                                     | Tipo   |
+| --------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------- | ------ |
+| Link do checkout                  | `{{ abandoned_checkout.checkout_url }}`                      | https://carrinho.pl/yz8uHM6                                               | String |
+| Moeda                             | `{{ abandoned_checkout.currency }}`                          | BRL                                                                       | String |
+| Número do carrinho                | `{{ abandoned_checkout.number }}`                            | 3777841398808                                                             | String |
+| Valor subtotal                    | `{{ abandoned_checkout.subtotal_price }}`                    | 169.97                                                                    | Number |
+| Valor subtotal (Formatado)        | `{{ abandoned_checkout.subtotal_price_formatted }}`          | R$169,97                                                                  | String |
+| Valor total                       | `{{ abandoned_checkout.total_price }}`                       | 129.59                                                                    | Number |
+| Valor total (Formatado)           | `{{ abandoned_checkout.total_price_formatted }}`             | R$129,59                                                                  | String |
+| Produtos (Formatado)              | `{{ abandoned_checkout.line_items_formatted }}`              | Produto 03 - AB                                                           | String |
+| Produtos com variante (Formatado) | `{{ abandoned_checkout.line_items_formatted_with_variant }}` | Produto 03 - AB - Variante / C - Off                                      | String |
+| Endereço (Formatado)              | `{{ abandoned_checkout.shipping_address_formatted }}`        | Rua Flores, 456 - C - Bairro dos Sonhos, Florianópolis, SC, 06970-000, BR | String |
+
+**Itens do Carrinho | `abandoned_checkout.line_items` - Array**
+
+| Nome                               | Variável                                             | Saída                          | Tipo   |
+| ---------------------------------- | ---------------------------------------------------- | ------------------------------ | ------ |
+| Itens do Carrinho (Array Completo) | `{{ abandoned_checkout.line_items }}`                | `[{"title": "Meu Robô"}, ...]` | Array  |
+| Título                             | `{{ abandoned_checkout.line_items.title }}`          | Meu Robô                       | String |
+| Nome da variante                   | `{{ abandoned_checkout.line_items.variante_title }}` | Vermelho                       | String |
+| Quantidade                         | `{{ abandoned_checkout.line_items.quantity }}`       | 1                              | Number |
+| Preço                              | `{{ abandoned_checkout.line_items.price }}`          | 219.45                         | Number |
+| URL da imagem                      | `{{ abandoned_checkout.line_items.image_url }}`      | https://….png                  | String |
+
+**Endereço de Entrega Carrinhos | `order.shipping_address` - Object**
+
+| Nome              | Variável                                             | Saída                    | Tipo   |
+| ----------------- | ---------------------------------------------------- | ------------------------ | ------ |
+| Endereço completo | `{{ abandoned_checkout.shipping_address }}`          | `{"zip":"06970-000", …}` | Object |
+| CEP               | `{{ abandoned_checkout.shipping_address.zip }}`      | 06970-000                | String |
+| Cidade            | `{{ abandoned_checkout.shipping_address.city }}`     | Florianópolis            | String |
+| Estado            | `{{ abandoned_checkout.shipping_address.province }}` | Santa Catarina           | String |
+| Endereço 1        | `{{ abandoned_checkout.shipping_address.address1 }}` | Rua Flores 456, Apto 31  | String |
+| Endereço 2        | `{{ abandoned_checkout.shipping_address.address2 }}` | Centro                   | String |

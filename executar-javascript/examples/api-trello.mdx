@@ -1,0 +1,63 @@
+---
+title: "Criando cartão no Trello"
+description: ""
+---
+
+Neste exemplo, demonstraremos como utilizar a funcionalidade **Executar JavaScript** para realizar uma requisição à API do Trello, com o objetivo de criar um novo cartão no Trello. A automação será configurada para capturar os dados de um pedido recém-criado na Reportana que contenha um produto específico. A partir desses dados, será feita a requisição para criar o cartão no Trello, contendo as informações relevantes do pedido.
+
+### Exemplo utilizando a API do Trello
+
+1. Primeiramente, utilizamos o gatilho de **Pedido Criado** em conjunto com a condição **Produto(s) → Contém → "Produto Exclusivo"**. Isso significa que, sempre que um novo pedido for criado e incluir um “produto exclusivo”, a automação será acionada para criar automaticamente um novo cartão no Trello, utilizando a [API Oficial do Trello](https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-post).
+
+<img src="/trello1.png" alt="Resultado da requisição `API Trello`" />
+<img src="/trello2.png" alt="Resultado da requisição `API Trello`" />
+
+2. Em seguida, caso o pedido criado contenha o “Produto Exclusivo”, acionaremos no **Executar JavaScript** a requisição para a API Trello, conforme o código baixo:
+
+<img src="/trello3-2.png" alt="Resultado da requisição `API Trello`" />
+
+<RequestExample>
+```JavaScript Exemplo de requisição para API do Trello
+const API_KEY = "KEY";
+const TOKEN = "API Token";
+
+// ID da lista onde o cartão será criado
+const LIST_ID = "LIST_ID";
+
+// Dados do pedido
+const name = order.customer_name;
+const phone = order.customer_phone;
+const number = order.number;
+
+// Dados do novo cartão
+const cardData = {
+  name: `Novo pedido de ${name}`,
+  desc: `Descrição do cartão:
+    - Número do Pedido: ${number}
+    - Contato no WhatsApp: https://wa.me/${phone}`,
+  idList: LIST_ID,
+  pos: "top",
+};
+
+const response = await axios.post(
+  `https://api.trello.com/1/cards?idList=${LIST_ID}&key=${API_KEY}&token=${TOKEN}`,
+  cardData
+);
+
+if (response.status === 200) {
+  payload.res = "Novo pedido criado com sucesso!";
+}
+```
+</RequestExample>
+
+**Observações:** Neste código, capturamos os dados de "nome", "telefone" e "número do pedido" referente ao pedido, para especificar esses dados na criação do cartão, conforme as diretrizes de uso da API do Trello. Além disso, para uso da API Oficial do Trello, será necessário obter a chave de API, API Token e o ID da lista desejada onde o cartão será criado. Para conferir mais instruções de uso da API, recomendamos acessar a documentação Oficial do Trello: [API Oficial do Trello](https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-cards-post).
+
+3. Assim que o cartão é criado com sucesso, na estrutura da nossa automação, configuramos para uma mensagem informativa para ser enviada ao nosso próprio número de WhatsApp, utilizando a opção de mensagem “Enviar para outro telefone”. O mesmo ocorre caso a requisição falhe.
+
+<img src="/trello4.png" alt="Resultado da requisição `API Trello`" />
+
+**Cartão criado no Trello, conforme o exemplo:**
+<img src="/trello5.png" alt="Resultado da requisição `API Trello`" />
+<img src="/trello6.png" alt="Resultado da requisição `API Trello`" />
+
+Para obter as credenciais da chave de API, token de API e ID da lista, acesse: [API Oficial do Trello](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/) e siga as instruções de uso. Se preferir, traduza a página em seu navegador para facilitar a leitura.

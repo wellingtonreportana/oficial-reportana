@@ -1,0 +1,35 @@
+---
+title: "Dados de Rastreios"
+description: "*Variáveis disponíveis para imprimir dados de rastreios em mensagens.*"
+---
+
+Estão disponíveis para uso somente em mensagens destinadas a pedidos que possuem um número de rastreio atrelado. Utilizado para exibir informações sobre o rastreio do cliente. Lembrando que nesse caso as variáveis irão funcionar somente se houver um pedido criado com um número de rastreio atrelado.
+
+**Dados Gerais de Rastreio**
+
+| **Nome**                    | **Variável**                             | **Saída**                     | **Tipo**    |
+| --------------------------- | ---------------------------------------- | ----------------------------- | ----------- |
+| Código de rastreio          | `{{ tracking_number.code }}`             | NL0000000000BR                | String      |
+| Novo código de rastreio     | `{{ tracking_number.new_code }}`         | NL0000000123BR                | String      |
+| Status completo             | `{{ tracking_number.full_status }}`      | DELIVERED                     | String      |
+| Tempo decorrido (em dias)   | `{{ tracking_number.elapsed_time }}`     | 30                            | Number      |
+| Taxação em                  | `{{ tracking_number.tax_at }}`           | 2024-11-30 11:46:45           | String    |
+| Entregue em                 | `{{ tracking_number.delivered_at }}`     | 2024-12-14 11:46:45           | String    |
+| Em devolução desde          | `{{ tracking_number.returning_to_sender_at }}` | 2024-11-30 11:46:45  | String    |
+| Devolvido ao remetente em   | `{{ tracking_number.returned_to_sender_at }}` | 2024-11-30 11:46:45 | String    |
+| Primeiro status atualizado  | `{{ tracking_number.first_update_at }}` | 2024-11-14 11:46:45           | String    |
+| Última atualização          | `{{ tracking_number.last_update_at }}`  | 2024-12-14 11:46:45           | String    |
+| Última requisição           | `{{ tracking_number.last_request_at }}` | 2024-12-14 11:46:45           | String    |
+| Link de rastreio            | `{{ order.tracking_numbers_url }}`       | rastreio.pl/pag.rastreio      | String      |
+
+
+**Eventos de Rastreio | `tracking_number.events` - Array**
+
+| Nome        | Variável                            | Saída                                           | Tipo   |
+| ----------- | ----------------------------------- | ----------------------------------------------- | ------ |
+| Eventos     | `{{ tracking_number.events }}`      | `[{"type": "Correios"}, ...]`                   | Array  |
+| Tipo        | `{{ tracking_number.type }}`        | CORREIOS                                        | String |
+| Data        | `{{ tracking_number.date }}`        | 2024-02-06 08:32:48                             | String |
+| Rótulo      | `{{ tracking_number.label }}`       | Objeto em transferência - por favor aguarde     | String |
+| Localização | `{{ tracking_number.location }}`    | Unidade de Tratamento - SAO JOSE DOS CAMPOS, SP | String |
+| Descrição   | `{{ tracking_number.description }}` | Aguardando mais informações                     | String |

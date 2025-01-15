@@ -1,0 +1,22 @@
+---
+title: "date modify"
+description: ""
+---
+
+### Introdução
+
+O filtro `date_modify` permite modificar datas, adicionando ou subtraindo períodos de tempo, como dias, meses ou anos. Ele é útil para ajustar dinamicamente a data em contextos onde é necessário manipular prazos ou calcular datas futuras e passadas.
+
+### Exemplo de uso
+
+Exemplo de como adicionar sete dias a uma data específica usando o filtro `date_modify`:
+
+```twig
+{{ NOW|date|date_modify('+7 days')|date('d/m/Y') }}
+```
+
+Neste exemplo, utilizamos uma combinação de filtros para manipular a data atual. O objetivo é obter a data de hoje, adicionar sete dias a ela utilizando `date_modify` e formatar o resultado com `date`.
+
+### Saída exemplo do código
+
+<img src="/date_modify.png" alt="Resultado do Filtro `date_modify`" />

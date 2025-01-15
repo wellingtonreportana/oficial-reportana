@@ -1,0 +1,46 @@
+---
+title: "Prazo de entrega"
+description: ""
+---
+
+Nesse exemplo, utilizamos o **Executar JavaScript** para calcular o prazo de entrega de acordo com a região do cliente.
+
+1. Primeiramente, na estrutura da automação, solicitamos que o cliente envie a sigla correspondente ao estado que ele reside. _Por exemplo: Enviar "SP" para quem reside em São Paulo_.
+
+<img src="/exp-prazo1.png" alt="Exemplo prazo de entrega: imagem 1" />
+
+2. Em seguida, salvamos a resposta do cliente na variável `payload.estado`.
+
+<img src="/exp-prazo2.png" alt="Exemplo prazo de entrega: imagem 2" />
+
+3. No **Executar JavaScript** utilizamos a variável `payload.estado` para executar o código que verifica o prazo de entrega de acordo com a região informada pelo cliente.
+
+<img src="/exp-prazo3.png" alt="Exemplo prazo de entrega: imagem 3" />
+
+4. Por último, o resultado do código será salvo na variável `payload.prazo` que é enviado ao cliente na última mensagem indicando o prazo de entrega de acordo com a região informada.
+
+**Observação:** No exemplo, utilizamos também um tratamento de erro no código, então caso a sigla informada pelo cliente não corresponda a nenhum estado brasileiro, uma mensagem de erro será exibida solicitando que tente novamente.
+
+<RequestExample>
+
+```javaScript Código Exemplo
+// Captura o estado informado pelo cliente
+var estado = payload.estado.toUpperCase(); // Converte para maiúsculas para garantir padronização
+
+// Calcula o prazo de entrega conforme o estado
+if (estado === 'SP' || estado === 'RJ' || estado === 'MG' || estado === 'ES') {
+  payload.prazo = 'Entrega em até 3 dias úteis'; // Região Sudeste
+} else if (estado === 'PR' || estado === 'SC' || estado === 'RS') {
+  payload.prazo = 'Entrega em até 4 dias úteis'; // Região Sul
+} else if (estado === 'BA' || estado === 'PE' || estado === 'CE' || estado === 'AL' || estado === 'SE' || estado === 'PB' || estado === 'RN') {
+  payload.prazo = 'Entrega em até 5 dias úteis'; // Região Nordeste
+} else if (estado === 'MT' || estado === 'MS' || estado === 'GO' || estado === 'DF') {
+  payload.prazo = 'Entrega em até 6 dias úteis'; // Região Centro-Oeste
+} else if (estado === 'AM' || estado === 'PA' || estado === 'RO' || estado === 'AC' || estado === 'RR' || estado === 'AP' || estado === 'TO') {
+  payload.prazo = 'Entrega em até 8 dias úteis'; // Região Norte
+} else {
+  payload.prazo = 'Estado não reconhecido. Verifique a sigla e tente novamente.'; // Tratamento de erro
+}
+```
+
+</RequestExample>

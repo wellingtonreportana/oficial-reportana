@@ -1,0 +1,101 @@
+---
+title: "Como capturar dados"
+description: ""
+---
+
+### Capturando com WhatsApp
+
+Nas automações e campanhas avançadas da Reportana, é possível usar mensagens de WhatsApp para interagir com os clientes e capturar dados importantes. As opções avançadas das mensagens de WhatsApp permitem validar as respostas enviadas pelo clientes e armazená-las em variáveis específicas para uso posterior. Essas variáveis podem ser utilizadas no **Executar JavaScript**, facilitando a criação de lógicas mais complexas. Veja o exemplo abaixo:
+
+<img src="/cap-data2.png" alt="Capturando com interações" />
+<img src="/cap-data3.png" alt="Capturando com interações" />
+<img src="/cap-data4.png" alt="Capturando com interações" />
+
+Neste exemplo, estabelecemos na estrutura da automação uma interação com o cliente para capturar suas respostas, que são armazenadas nas variáveis `payload.altura` e `payload.peso`. Essas variáveis podem ser utilizadas posteriormente para calcular o IMC, conforme o exemplo a seguir:
+
+<img src="/cap-data5.png" alt="Capturando com payload" />
+
+<RequestExample>
+
+```javascript Código Exemplo 1
+var altura = payload.altura / 100;
+
+var imc = payload.peso / (altura \* altura);
+
+if (imc < 20) {
+payload.resultado = 'Você esta abaixo do peso!';
+} else if (imc > 20 && imc <= 25) {
+payload.resultado = 'Peso Ideal';
+} else if (imc > 25 && imc <= 30) {
+payload.resultado = 'Sobrepeso';
+} else if (imc > 30 && imc <= 35) {
+payload.resultado = 'Obesidade Moderada';
+} else if (imc > 35 && imc <= 40) {
+payload.resultado = 'Obesidade Severa';
+} else if (imc > 40 && imc <= 50) {
+payload.resultado = 'Obesidade Morbida';
+} else {
+payload.resultado = 'Resultado não definido';
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+
+```javascript Código Exemplo 2
+var valorAssinatura = payload.response_json.usuarios[0].valorAssinatura;
+
+// Calculando o valor com desconto de 15%
+var valorComDesconto = valorAssinatura - valorAssinatura * 0.15;
+
+payload.desconto = valorComDesconto.toFixed(2);
+```
+
+</ResponseExample>
+
+Para aprimorar o conhecimento sobre a captura de dados utilizando mensagens de WhatsApp, recomendamos a leitura do nosso artigo disponível na Central de Ajuda: [Entendendo as Ações de Lógico, Tempo, Chat e Avançado das Automações ➾ Ações de Avançado](https://reportana.com/help/article/conhecendo-opcoes-de-acao-tempo-e-logica-de-automacoes#adicionar-à-lista)
+
+### Capturando com Enviar Webhook
+
+Em automações e campanhas avançadas, é possível também utilizar a funcionalidade de **Enviar Webhook** para receber e capturar dados de outros sistemas. Esses dados podem ser integrados às automações, permitindo que, juntamente com o uso do **Executar JavaScript**, as automações sejam personalizadas criando experiências dinâmicas durante a interação com o cliente.
+
+1. Para configurar a captura de dados através do **Enviar Webhook**, primeiramente você pode definir a URL de um sistema externo e escolher o método de solicitação desejado.
+
+<img src="/webhook1.png" alt="EExemplo Enviar Webhook: imagem 1" />
+
+2. Para a captura, a resposta recebida pode ser armazenada em uma variável específica, que poderá ser utilizada nas etapas seguintes da automação. No exemplo, escolhemos `payload.response_json` como a variável que irá armazenar as informações.
+
+<img src="/webhook2.png" alt="EExemplo Enviar Webhook: imagem 2" />
+
+3. No exemplo, recebemos os seguintes dados de uma assinatura no formato JSON:
+
+```json
+{
+  "usuarios": [
+    {
+      "nome": "Maria Souza",
+      "email": "maria.souza@example.com",
+      "telefone": "+55 11 98765-4321",
+      "plano": "Premium",
+      "valorAssinatura": 149.99
+    }
+  ]
+}
+```
+
+- Nome: Nome utilizado no cadastro da assinatura.
+- E-mail: E-mails utilizado no cadastro da assinatura.
+- Telefone: Telefone utilizado no cadastro da assinatura.
+- Plano: Plano ativo na assinatura.
+- Valor da Assinatura: Valor da Assinatura em questão.
+
+4. Em seguida, no **Executar JavaScript**, acessamos diretamente esses dados capturados pelo **Enviar Webhook** e criamos o código para disponibilizar ao cliente em questão, através do WhatsApp, o valor da assinatura com 15% de desconto aplicado.
+
+<img src="/webhook3.png" alt="Exemplo Enviar Webhook: imagem 3" />
+
+**Observação:** No código, acessamos especificamente a propriedade `payload.response_json.usuarios[0].valorAssinatura` que corresponde ao valor atual da assinatura.
+
+5. Por fim, utilizamos o resultado do código salvo na variável `payload.desconto` na mensagem de WhatsApp que iremos enviar ao cliente.
+
+<img src="/webhook4.png" alt="Exemplo Enviar Webhook: imagem 4" />

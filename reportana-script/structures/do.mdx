@@ -1,0 +1,23 @@
+---
+title: "do"
+description: ""
+---
+
+### Introdução
+
+A propriedade `do` permite executar uma função ou método sem imprimir o resultado na saída. Ele é útil quando você precisa executar uma operação que não requer exibição direta, como a modificação de uma variável ou a execução de uma lógica específica.
+
+### Exemplo de uso
+
+Exemplo de como utilizar o comando do para modificar uma variável sem imprimir nada na saída:
+
+```twig
+{% set lista = [1, 2, 3] %}
+{% do lista.append(4) %}
+```
+
+Neste exemplo, o comando `do` é usado para adicionar o número 4 à lista. A operação é realizada sem que nada seja impresso na tela.
+
+### Saída exemplo do código:
+
+_Neste caso, não há saída direta, pois o comando do não imprime resultados. No entanto, se você imprimir a variável `lista` depois da operação, verá que ela foi modificada._

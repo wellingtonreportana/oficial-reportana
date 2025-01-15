@@ -1,0 +1,15 @@
+---
+title: "Como utilizar dados capturados"
+description: ""
+---
+
+Os dados capturados podem ser utilizados no **Executar JavaScript** para executar os códigos desejados, como no exemplo do cálculo de IMC, onde capturamos os dados de peso e altura do cliente e salvamos nas variáveis `payload.altura` e `payload.peso`:
+
+<img src="/cap-data5.png" alt="Capturando com payload" />
+
+No código acima, além de utilizar os dados capturados através da interação com o cliente, desenvolvemos o código para salvar o resultado do cálculo na variável `payload.resultado`. Como definimos o atributo resultado na variável `payload`, essa informação poderá ser utilizada posteriormente em outras mensagens da mesma automação, como no exemplo, onde temos uma última mensagem para exibir o resultado do cálculo de IMC ao cliente:
+
+<img src="/cap-data6.png" alt="Capturando com payload" />
+<img src="/cap-data7.png" alt="Capturando com payload" />
+
+Assim, é possível incorporar resultados de processos complexos utilizando o **Executar JavaScript** em mensagens direcionadas ao cliente, garantindo uma resposta personalizada e dinâmica, como no exemplo onde a última mensagem exibe o resultado do IMC calculado.

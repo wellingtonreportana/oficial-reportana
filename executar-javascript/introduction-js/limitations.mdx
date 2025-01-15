@@ -1,0 +1,36 @@
+---
+title: "Limitações"
+description: ""
+---
+
+É importante observar que o **Executar JavaScript** apresenta algumas limitações técnicas que visam garantir a segurança de seu uso e a execução dinâmica dos códigos. Essas restrições asseguram que os scripts sejam processados de maneira eficiente, promovendo a criação de soluções personalizadas sem comprometer a performance global do sistema, abaixo iremos documentar as principais limitações e bibliotecas dessa funcionalidade:
+
+1. **Requisições HTTP:** As requisições HTTP são permitidas através da biblioteca [Axios](https://axios-http.com), conforme o exemplo demonstrado a seguir:
+
+_Exemplo de requisição HTTP utilizando Axios:_
+
+```JavaScript
+const response = await axios.get('https://economia.awesomeapi.com.br/last/USD-BRL');
+payload.dollar = response.data;
+```
+
+<RequestExample>
+
+```javascript Exemplo de requisição HTTP utilizando Axios
+const response = await axios.get(
+  "https://economia.awesomeapi.com.br/last/USD-BRL"
+);
+payload.dollar = response.data;
+```
+
+</RequestExample>
+
+2. **Memória Máxima de 128MB:** O **Executar JavaScript** possui um limite máximo de memória disponível de 128MB. Esse controle garante que os processos sejam eficientes, evitando sobrecarga do sistema.
+
+3. **Tempo Máximo de 60 Segundos de Execução:** Cada execução do **Executar JavaScript** é limitada a um tempo máximo de 60 segundos. Caso o código ultrapasse esse tempo limite, o processamento será interrompido automaticamente para assegurar a estabilidade do ambiente de execução.
+
+4. **Bibliotecas Disponíveis:** Além da biblioteca **Axios**, o **Executar JavaScript** também oferece suporte às bibliotecas [CryptoJS](https://cryptojs.gitbook.io/docs) e [Moment.js](https://momentjs.com/docs/).
+
+        - **CryptoJS:** Biblioteca para hashing, encriptação e descriptografia, ideal para manipular dados sensíveis com segurança.
+
+        - **Moment.js:** Biblioteca para manipulação, análise e formatação de datas e horários, incluindo fusos horários e cálculos de intervalos.

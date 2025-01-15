@@ -1,0 +1,32 @@
+---
+title: "if / else"
+description: ""
+---
+
+A propriedade `if` é uma estrutura condicional que nos permite realizar verificações em variáveis específicas do sistema. Com ela, podemos avaliar se uma determinada condição é verdadeira ou falsa e executar diferentes blocos de código com base nessa avaliação.
+
+Como _por exemplo_, verificar se a variável `order.total_price` é maior que _150_ e aplicar um cupom de desconto dinamicamente de acordo com o valor:
+
+```twig
+{% if order.total_price > 150 %}
+
+Valor Atual: {{ order.total_price }}
+Valor Com Desconto: {{ (order.total_price * 0.85)|format_currency(order.currency|default(shop.currency_code)) }}
+_(Desconto de 15% aplicado)_
+
+{% else %}
+
+Valor Atual: {{ order.total_price }}
+Valor Com Desconto: {{ (order.total_price * 0.90)|format_currency(order.currency|default(shop.currency_code)) }}
+
+_(Desconto de 10% aplicado)_
+{% endif %}
+```
+
+Nesse exemplo, verificamos se a variável `order.total_price` é maior que 150 utilizando a propriedade `{% if %}`. Se for, aplicamos um desconto de 15% que exibe o novo valor com o desconto aplicado e formatado. Caso contrário, utilizamos a propriedade `{% else %}` para aplicar um desconto de 10% e exibimos também o novo valor com o desconto aplicado e formatado.
+
+Em ambos os casos, o código mostra o valor atual do pedido e o valor com o desconto, além de indicar qual desconto foi aplicado.
+
+**Saída exemplo do código:**
+
+<img src="/ex-discount.png" alt="Exemplo `if/else`" />

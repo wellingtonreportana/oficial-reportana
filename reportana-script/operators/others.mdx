@@ -1,0 +1,62 @@
+---
+title: "Others"
+description: ""
+---
+
+Além dos operadores matemáticos, de comparação e lógicos, também é possível utilizar uma série de operadores adicionais que não se enquadram nas categorias tradicionais, mas que são extremamente utilizados para complementar o código.
+
+**Outros operadores suportados:**
+
+`|`: Aplica um filtro a uma variável.
+
+_Exemplo de uso:_
+
+```twig
+{{ 'apple'|upper }}
+{# Retorna 'APPLE' #}
+```
+
+`~`: Concatena dois valores, geralmente strings.
+
+_Exemplo de uso:_
+
+```twig
+{{ 'Hello, ' ~ 'World!' }}
+{# Retorna 'Hello, World!' #}
+```
+
+`.`: Acessa uma propriedade ou método de um objeto, ou um elemento de um array.
+
+_Exemplo de uso:_
+
+```twig
+{{ order.number }}
+{# Acessa a propriedade 'number' do objeto 'order' #}
+```
+
+`[]`: Acessa um elemento específico em uma sequência (array).
+
+_Exemplo de uso:_
+
+```twig
+{{ fruits[0] }}
+{# Acessa o primeiro elemento do array 'fruits' #}
+```
+
+`?:`: Operador ternário. Retorna o valor à esquerda se for definido e não for nulo; caso contrário, retorna o valor à direita.
+
+_Exemplo de uso:_
+
+```twig
+{{ first_name ?: 'Guest' }}
+{# Retorna 'Guest' se 'first.name' não estiver definido ou for nulo #}
+```
+
+`??`: Verifica se um valor está definido e não é nulo; caso contrário, retorna um valor padrão.
+
+_Exemplo de uso:_
+
+```twig
+{{ order.total_price ?? 'Valor não definido' }}
+{# Retorna 'Valor não definido' se 'order.total_price' não estiver definido ou for nulo #}
+```

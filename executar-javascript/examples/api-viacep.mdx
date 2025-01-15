@@ -1,0 +1,59 @@
+---
+title: "Consulta CEP"
+description: ""
+---
+
+Neste exemplo, demonstraremos como estruturar uma consulta automática utilizando a funcionalidade **Executar JavaScript** para consumir a API do ViaCEP. O objetivo é interagir com o cliente, coletar e validar o CEP informado, realizar a consulta e entregar o endereço correspondente de forma dinâmica e automatizada.
+
+### Exemplo utilizando a API do ViaCEP
+
+1. Primeiramente, será necessário utilizar o gatilho de **Conversa Criada (WhatsApp)** na automação e validar resposta para salvarmos o valor do CEP informado na variável `payload.cep`.
+
+   <img src="/cep1.png" alt="Resultado da requisição `ViaCEP`" />
+   <img src="/cep2.png" alt="Resultado da requisição `ViaCEP`" />
+
+2. Assim que o CEP é informado, nosso sistema salva automaticamente o valor recebido (número do CEP) na variável `payload.cep`.
+
+3. Em seguida, utilizamos o **Executar JavaScript** para fazer a requisição para a API do ViaCEP e buscar o endereço referente ao mesmo, conforme o código abaixo:
+
+<img src="/cep3.png" alt="Resultado da requisição `ViaCEP`" />
+<img src="/cep4-2.png" alt="Resultado da requisição `ViaCEP`" />
+
+<RequestExample>
+
+```JavaScript Exemplo de requisição para API do ViaCEP
+var cep = payload.cep;
+
+const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+
+if (response.status === 200) {
+  // Salvando os dados da API
+  payload.endereco = response.data.logradouro || "Endereço não encontrado"
+  payload.bairro = response.data.bairro || "Bairro não disponível"
+  payload.localidade = response.data.localidade || "Localidade não disponível"
+  payload.uf = response.data.uf || "UF não disponível"
+}
+```
+
+</RequestExample>
+
+4. Caso a requisição falhe, o código utilizado tenha problemas ou CEP informado esteja incorreto, podemos utilizar o **Executar JavaScript** para tratar o erro criando uma mensagem informativa e com opções para reiniciar a consulta.
+
+<img src="/cep5.png" alt="Resultado da requisição `ViaCEP`" />
+
+5. Caso a requisição seja feita com sucesso, a mensagem de confirmação com o endereço referente ao CEP será enviada. Nessa mensagem, utilizamos também opções de botões para direcionar a conversa a um atendente ou finalizar o processo de confirmação.
+
+<img src="/cep6.png" alt="Resultado da requisição `ViaCEP`" />
+<img src="/cep7.png" alt="Resultado da requisição `ViaCEP`" />
+
+**Observações:**
+
+1. Para conhecer mais sobre as configurações avançadas das nossas mensagens de WhatsApp, acesse nosso artigo na central de ajuda: [Entendendo as Ações de Lógico, Tempo, Chat e Avançado das Automações ➾ Como Usar as Ações de Avançado](https://reportana.com/help/article/conhecendo-opcoes-de-acao-tempo-e-logica-de-automacoes#como-usar-as-ações-de-avançado)
+
+2. Para conhecer mais sobre a estruturação de mensagens de WhatsApp, automações e utilização de botões, acesse nossos tutoriais:
+
+   - Automações: https://reportana.com/help/category/automations
+   - WhatsApp Marketing: https://reportana.com/help/category/whatsapp-marketing
+   - Mensagens com botões: https://reportana.com/help/article/como-criar-mensagens-de-whatsapp-com-botoes
+
+3. Para conferir a API do ViaCEP, acesse a documentação oficial: https://viacep.com.br

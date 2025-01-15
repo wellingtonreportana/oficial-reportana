@@ -1,0 +1,38 @@
+---
+title: "find_order_by_number"
+description: ""
+---
+
+### Introdução
+
+A função `find_order_by_number` é utilizada para buscar pedidos realizados conforme o número do pedido informado pelo cliente. Ela é útil para criar consultas de pedidos em automações de chatbot, por exemplo. Sendo possível exibir informações sobre o pedido. Lembrando que nesse caso, o sistema irá buscar apenas o pedido associado ao número de pedido informado pelo cliente.
+
+> **Atenção:** A função `find_order_by_number` funciona exclusivamente por meio do envio de Automações, Campanhas e Campanhas Avançadas.
+
+### Exemplo de uso
+
+Exemplo de como utilizar a função `find_order_by_number`:
+
+```twig
+{% set data = find_order_by_number(number) %}
+
+{% if data is not empty and data.order is not empty %}
+*#{{ data.order.number }}*
+{% if data.order.payment_method == 'BOLETO' %}🏷 _Boleto_{% elseif data.order.payment_method == 'CREDIT_CARD' %}💳 _Cartão de crédito_{% elseif data.order.payment_method == 'PIX' %}🤳🏼 _Pix_{% else %}🏷 _Outro_{% endif %}
+
+{% if data.order.payment_status == 'PAID' %}✅ _Pago_{% elseif data.order.payment_status == 'PENDING' %}⏳ _Pendente_{% else %}❌ _Não pago_{% endif %}
+
+{% if data.order.tracking_numbers_url is not empty %}🚚 {{ data.order.tracking_numbers_url }}{% else %}🚚 _Envio pendente_{% endif %}
+{% else %}
+Não há pedido associado ao número: {{ number }}.
+{% endif %}
+```
+
+### Saída exemplo do código
+
+<img
+  src="/find_order_by_number.png"
+  alt="Resultado do Filtro `find_orders_by_number`"
+/>
+
+No exemplo acima, usamos a função `find_order_by_number` para procurar um pedido com base no número informado pelo cliente, que está na variável `number`, retornando as informações sobre o pedido.
